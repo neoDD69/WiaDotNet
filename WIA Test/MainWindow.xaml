@@ -1,0 +1,25 @@
+﻿<Window x:Class="WIA_Test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WIA_Test"
+        mc:Ignorable="d"
+        Title="WIA Test" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Horizontal" Name="Panel1">
+            <ComboBox Name="scannersCombo" DisplayMemberPath="Name" VerticalContentAlignment="Center" Width="150"/>
+            <CheckBox Content="Show UI" Name="chkShow" Margin="10,8,10,0"/>
+            <Button Name="btnScan" HorizontalAlignment="Left" Content="Scan" Click="BtnScan_OnClick" Width="100"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Background="#FFF7F7F7">
+            <Image Name="previewImage" Margin="0,0,0,0"/>
+        </Grid>
+    </Grid>
+</Window>
