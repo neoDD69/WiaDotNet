@@ -76,18 +76,17 @@ namespace WIA_Test
                 DPI = 200,
                 ImageFormat = WiaImageFormat.PNG
             };
-            try
+
+            WiaResult result = _manager.Scan(out List<string> images, scannerId, settings);
+            if (result.Error == WiaError.SUCCESS)
             {
-                WiaResult result = _manager.Scan(out List<string> images, scannerId, settings);
-                if (result.Error == WiaError.SUCCESS && images.Count > 0)
-                {
+                if (images.Count > 0)
                     previewImage.Source = new BitmapImage(new Uri(images[0]));
-                }
+                else
+                    MessageBox.Show("No images!");
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            else
+                MessageBox.Show(result.Error.ToString());
         }
     }
 }
