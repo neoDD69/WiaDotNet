@@ -107,6 +107,9 @@ namespace WiaDotNet
         /// <param name="settings"></param>
         public WiaResult Scan(out List<string> images, string scannerId, ScanSettings settings)
         {
+            // give a default setting if null
+            if (settings == null)
+                settings = new ScanSettings();
             images = new List<string>();
             // parse file extension
             string extension;
@@ -222,8 +225,10 @@ namespace WiaDotNet
             return result;
         }
 
-        private void SetScanSettings(Item item, ScanSettings settings)
+        private static void SetScanSettings(Item item, ScanSettings settings)
         {
+            if (settings == null)
+                return;
             SetBrightness(item, settings.Brightness);
             SetContrast(item, settings.Contrast);
             if (settings.DPI.HasValue)
@@ -245,18 +250,18 @@ namespace WiaDotNet
             }
         }
 
-        private void SetResolution(Item item, int dpi)
+        private static void SetResolution(Item item, int dpi)
         {
             SetItem(item, WIA_PROPERTIES.WIA_IPS_XRES, dpi);
             SetItem(item, WIA_PROPERTIES.WIA_IPS_YRES, dpi);
         }
 
-        private void SetBrightness(Item item, int value)
+        private static void SetBrightness(Item item, int value)
         {
             SetItem(item, WIA_PROPERTIES.WIA_IPS_BRIGHTNESS, value);
         }
 
-        private void SetContrast(Item item, int value)
+        private static void SetContrast(Item item, int value)
         {
             SetItem(item, WIA_PROPERTIES.WIA_IPS_CONTRAST, value);
         }
@@ -264,7 +269,7 @@ namespace WiaDotNet
         /// <summary>
         /// Set the current width, in pixels, of a selected image to acquire.
         /// </summary>
-        private void SetXExtent(Item item, int value)
+        private static void SetXExtent(Item item, int value)
         {
             SetItem(item, WIA_PROPERTIES.WIA_IPS_XEXTENT, value);
         }
@@ -272,22 +277,22 @@ namespace WiaDotNet
         /// <summary>
         /// Set the current width, in pixels, of a selected image to acquire.
         /// </summary>
-        private void SetYExtent(Item item, int value)
+        private static void SetYExtent(Item item, int value)
         {
             SetItem(item, WIA_PROPERTIES.WIA_IPS_YEXTENT, value);
         }
 
-        private void SetWidth(Item item, int value)
+        private static void SetWidth(Item item, int value)
         {
             SetItem(item, WIA_PROPERTIES.WIA_IPS_PAGE_WIDTH, value);
         }
 
-        private void SetHeight(Item item, int value)
+        private static void SetHeight(Item item, int value)
         {
             SetItem(item, WIA_PROPERTIES.WIA_IPS_PAGE_HEIGHT, value);
         }
 
-        private void SetOrientation(Item item, WiaOrientation value)
+        private static void SetOrientation(Item item, WiaOrientation value)
         {
             SetItem(item, WIA_PROPERTIES.WIA_IPS_ORIENTATION, (int) value);
         }
